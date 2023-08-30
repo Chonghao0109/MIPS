@@ -1,5 +1,110 @@
 # MIPS Instruction Set Architecture Processer
 
+# Entity: core 
+- **File**: core.v
+
+## Diagram
+![Diagram](README_File/core.svg "Diagram")
+## Ports
+
+| Port name               | Direction | Type        | Description |
+| ----------------------- | --------- | ----------- | ----------- |
+| Processer_clk           | input     | wire        |             |
+| run                     |           |             |             |
+| rst                     |           |             |             |
+| instruction_memory_data | input     | wire [31:0] |             |
+| PC                      | output    | wire [31:0] |             |
+| Memory_Adder            | output    | wire [31:0] |             |
+| Memory_datain           |           |             |             |
+| MemWrite                | output    | wire        |             |
+| MemRead                 |           |             |             |
+| Memory_data             | input     | wire [31:0] |             |
+
+## Signals
+
+| Name            | Type        | Description |
+| --------------- | ----------- | ----------- |
+| clk             | wire        |             |
+| IF_instruction  | wire [31:0] |             |
+| IF_PC           | wire [31:0] |             |
+| IF_PCa4         | wire [31:0] |             |
+| ID_instruction  | wire [31:0] |             |
+| ID_PC           | wire [31:0] |             |
+| ID_imm32        | wire [31:0] |             |
+| ID_RegDst       | wire        |             |
+| ID_ALUsrc       | wire        |             |
+| ID_MemtoReg     | wire        |             |
+| ID_RegWrite     | wire        |             |
+| ID_MemWrite     | wire        |             |
+| ID_MemRead      | wire        |             |
+| ID_PCstc        | wire [1:0]  |             |
+| ID_ALUop        | wire [3:0]  |             |
+| ID_A            | wire [31:0] |             |
+| ID_B            | wire [31:0] |             |
+| EXE_RegDst      | wire        |             |
+| EXE_ALUsrc      | wire        |             |
+| EXE_MemtoReg    | wire        |             |
+| EXE_RegWrite    | wire        |             |
+| EXE_MemWrite    | wire        |             |
+| EXE_MemRead     | wire        |             |
+| EXE_PCstc       | wire [1:0]  |             |
+| EXE_ALUop       | wire [3:0]  |             |
+| EXE_PC          | wire [31:0] |             |
+| EXE_A           | wire [31:0] |             |
+| EXE_B           | wire [31:0] |             |
+| EXE_ALUB        | wire [31:0] |             |
+| EXE_imm32       | wire [31:0] |             |
+| EXE_instruction | wire [25:0] |             |
+| EXE_zero        | wire        |             |
+| EXE_result      | wire [31:0] |             |
+| EXE_t1          | wire [31:0] |             |
+| EXE_t2          | wire [31:0] |             |
+| EXE_rw          | wire [4:0]  |             |
+| rA              | wire [31:0] |             |
+| rB              | wire [31:0] |             |
+| MEM_MemtoReg    | wire        |             |
+| MEM_RegWrite    | wire        |             |
+| MEM_MemWrite    | wire        |             |
+| MEM_MemRead     | wire        |             |
+| MEM_t1          | wire [31:0] |             |
+| MEM_t2          | wire [31:0] |             |
+| MEM_zero        | wire        |             |
+| MEM_PCstc       | wire [1:0]  |             |
+| MEM_result      | wire [31:0] |             |
+| MEM_B           | wire [31:0] |             |
+| MEM_rw          | wire [4:0]  |             |
+| MEM_dataout     | wire [31:0] |             |
+| WB_MemtoReg     | wire        |             |
+| WB_RegWrite     | wire        |             |
+| WB_result       | wire [31:0] |             |
+| WB_dataout      | wire [31:0] |             |
+| WB_busW         | wire [31:0] |             |
+| WB_rw           | wire [4:0]  |             |
+| As              | wire [1:0]  |             |
+| Bs              | wire [1:0]  |             |
+| hazardclr       | wire        |             |
+| clr             | wire        |             |
+
+## Instantiations
+
+- IF: IF
+- IFIDReg: IFIDReg
+- controlunit: controlunit
+- gpr: gpr
+- IDEXEReg: IDEXEReg
+- mux1: mux1
+- mux2: mux2
+- ALU: ALU
+- PCdecoder: PCdecoder
+- EXEMEMReg: EXEMEMReg
+- MEMWBReg: MEMWBReg
+- mux3: mux3
+- forwards: forwards
+- ALU_DataSelectA: ALU_DataSelect
+- ALU_DataSelectB: ALU_DataSelect
+- branchHazard: branchHazard
+
+
 ## 簡介
 設計MIPS指令集構的處理器，並且優化它。
 從最基本的Single Cycle Processer到加入了Pipeline的Multi Cycle Processer，再到排除Hazards後，形成功能正常與速度更快的一顆的Multi Cycle Processer。
