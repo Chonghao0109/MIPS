@@ -1,3 +1,24 @@
+/*
+ * -----------------------------------------------------------------------
+ * File: core.v
+ * Created Date: 2025-02-24 11:00:48
+ * Author: ChongHao Xu
+ * Email: chonghaoxu0109@gmail.com
+ * -----
+ * Last Modified: 2025-02-24 11:01:10
+ * Modified By: ChongHao Xu
+ * -----
+ * Copyright (c) 2025 Digital IC Design Lab(802) EC,NKUST
+ * All rights reserved.
+ * -----
+ * Description: 
+ * 
+ * 
+ * -----
+ * HISTORY:
+ * Date      	By  	Comments
+ * -----------------------------------------------------------------------
+ */
 module core(
     input wire Processer_clk,run,rst,
     //instruction Memory
